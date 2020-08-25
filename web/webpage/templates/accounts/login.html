@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+  <script>
+    alert("Your username and password didn't match. Please try again.");
+  </script>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <script>
+      alert("Your account doesn't have access to this page. To proceed, please login with an account that has access.");
+    </script>
+  {% else %}
+    <script>
+      alert("Please login to see this page.");
+    </script>
+  {% endif %}
+{% endif %}
+
+<style>
+  .wrapper {
+    margin-top: 200px;
+  }
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .spacer {
+    height: 30px;
+  }
+</style>
+
+<div class="wrapper">
+  <form method="post" action="{% url 'login' %}" class="center">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {{ form.username.label_tag }}
+    {{ form.username }}
+    <span class="spacer"></span>
+    {{ form.password.label_tag }}
+    {{ form.password }}
+    <span class="spacer"></span>
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+{% endblock %}
