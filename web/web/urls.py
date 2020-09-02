@@ -33,6 +33,8 @@ urlpatterns = [
     path('cafeMain/', webpage.views.cafeMain, name='cafeMain'),
     path('createWrite/', webpage.views.createWrite, name='createWrite'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('cafeMain/detail/', webpage.views.detail, name='detail'),
+    path('cafeMain/detail/<int:write_id>/', webpage.views.detail, name='detail'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
