@@ -44,3 +44,9 @@ $ python manage.py runserver
 ```text
 $ python manage.py runserver 8080
 ```
+
+# 추가한 것
+카페 메인 html, 글쓰기 기능
+
+# 진행중인 것
+게시물 리스트, 글쓰기 기능
