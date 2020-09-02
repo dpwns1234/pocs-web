@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -38,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +60,7 @@ ROOT_URLCONF = 'web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'webpage/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,9 +109,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -120,9 +125,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_DIRS = [
+    os.path.join(BASE_DIR, 'webpage', 'static')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Template directory
 
-TEMPLATE_DIRS = (
+TEMPLATE_DIRS = [
     BASE_DIR.joinpath('webpage', 'templates'),
-)
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media/'

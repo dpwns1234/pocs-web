@@ -16,14 +16,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.views import LoginView
-
 from webpage.views import index
+import webpage.views
+from django.conf.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include([
-        path('login/', LoginView.as_view(template_name='accounts/login.html'), name='login')
+    path('login/', LoginView.as_view(template_name='accounts/login.html'), name='login')
     ])),
 
-    path('', index)
+    path('', index),
+    path('cafeMain/', webpage.views.cafeMain, name='cafeMain'),
+    path('createWrite/', webpage.views.createWrite, name='createWrite'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
